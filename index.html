@@ -20,7 +20,6 @@
             flex-direction: column;
         }
 
-        /* Header */
         header {
             background: #fefefd;
             border-bottom: 3px solid #4a3b3a;
@@ -44,7 +43,6 @@
             display: block;
         }
 
-        /* Navigation */
         nav {
             background: #fefefd;
             border-top: 2px solid #4a3b3a;
@@ -94,7 +92,6 @@
             color: #fefefd;
         }
 
-        /* Main Content */
         main {
             flex: 1;
             max-width: 1200px;
@@ -217,7 +214,7 @@
             border: 2px solid #4a3b3a;
             border-radius: 5px;
             padding: 22px 20px;
-            text-align: center;
+            text-align: justify;
         }
 
         .arg-column h3 {
@@ -226,6 +223,7 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 12px;
+            text-align: center;
         }
 
         .arg-column p {
@@ -233,9 +231,14 @@
             font-size: 15px;
             line-height: 1.7;
             margin-bottom: 0;
+            text-align: justify;
         }
 
-        /* Footer */
+        .bmc-wrap {
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
         footer {
             background: #fefefd;
             border-top: 3px solid #4a3b3a;
@@ -285,7 +288,6 @@
             margin-top: 15px;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
@@ -327,7 +329,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-container">
             <div class="logo">
@@ -336,7 +337,6 @@
         </div>
     </header>
 
-    <!-- Navigation -->
     <nav>
         <ul>
             <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
@@ -347,9 +347,7 @@
         </ul>
     </nav>
 
-    <!-- Main Content -->
     <main>
-        <!-- Home Section -->
         <section id="home" class="content-section active">
             <h1>Welcome to TEAM a.r.g.</h1>
             <p>TEAM a.r.g. (Arduboy Retro Gaming) is about creating 1 bit pixel games for the Arduboy game system. But you can play all games in your browser too. The team was started by Joeri Gantois (JO3RI) in 2013.</p>
@@ -359,6 +357,9 @@
             <h2>Our Games are Free:</h2>
             <p>All our games are free and always will be free to play and so is the code of the games. So you can learn from it. The pixel-art sometimes has a different License. If you like our games, you can sponsor us with a "coffee" it helps us pay other people's software we use.</p>
 
+            <div class="bmc-wrap">
+                <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="TEAMarg" data-color="#5d4c4b" data-emoji="☕" data-font="Cookie" data-text="Cool game? Buy us a coffee" data-outline-color="#fefefd" data-font-color="#fefefd" data-coffee-color="#FFDD00"></script>
+            </div>
             <h2>Featured game:</h2>
             <div class="game-banner">
                 <a href="https://t-arg.github.io/ID-40-VIRUS-LQP-79/">
@@ -382,7 +383,6 @@
             <p>Connect with us on <a href="https://github.com/T-arg">GitHub</a> to see our latest projects and contributions.</p>
         </section>
 
-        <!-- Games Section -->
         <section id="games" class="content-section">
             <h1>Games</h1>
             <p>Our collection of games for the Arduboy platform:</p>
@@ -443,7 +443,7 @@
 
             <div class="game-banner">
                 <a href="https://t-arg.github.io/ID-42-Sirene/">
-                <img src="https://github.com/T-arg/ID-42-Sirene/blob/master/art/banner-ID-42.png?raw=true" alt="Sirène">
+                <img src="https://github.com/T-arg/ID-42-Sirene/blob/master/art/banner-ID-42.png?raw=true" alt="Sirene">
                 </a>
             </div>
 
@@ -458,10 +458,8 @@
                 <img src="https://github.com/T-arg/ID-48-Fantasy-Rampage/blob/master/art/banner-ID-48.png?raw=true" alt="Fantasy Rampage">
                 </a>
             </div>
-            
-          
-            <div class="projects-grid">
 
+            <div class="projects-grid">
                 <div class="project-card">
                     <h3>More Coming Soon</h3>
                     <p>We're constantly working on new and exciting games. Stay tuned for updates!</p>
@@ -470,7 +468,6 @@
             </div>
         </section>
 
-        <!-- Demos Section -->
         <section id="demos" class="content-section">
             <h1>Demos</h1>
             <p>We develop various demos show what we can do on the arduboy:</p>
@@ -488,7 +485,6 @@
             </div>
         </section>
 
-        <!-- Tools Section -->
         <section id="tools" class="content-section">
             <h1>Tools</h1>
             <p>We develop various tools to help with game development and Arduino projects:</p>
@@ -506,7 +502,6 @@
             </div>
         </section>
 
-        <!-- About Section -->
         <section id="about" class="content-section">
             <h1>About TEAM a.r.g.</h1>
             <h2>Our Story</h2>
@@ -516,7 +511,7 @@
             <h2>Technology</h2>
             <p>We primarily work with:</p>
             <ul style="margin-left: 20px; margin-bottom: 15px;">
-                <li><strong>Arduino &amp; Arduboy:</strong> The heart of our hardware projects</li>
+                <li><strong>Arduino & Arduboy:</strong> The heart of our hardware projects</li>
                 <li><strong>Web Technologies:</strong> For tools and online experiences</li>
                 <li><strong>Open Source:</strong> All our projects are freely available on GitHub</li>
             </ul>
@@ -525,7 +520,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="social-links">
@@ -536,22 +530,15 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Navigation -->
     <script>
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                
-                // Remove active class from all links and sections
                 document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                 document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-                
-                // Add active class to clicked link and corresponding section
                 link.classList.add('active');
                 const page = link.getAttribute('data-page');
                 document.getElementById(page).classList.add('active');
-                
-                // Smooth scroll to top
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
