@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Visits — TEAM a.r.g.</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#fefefd;color:#333;min-height:100vh}
+  header{border-bottom:3px solid #4a3b3a;padding:20px;box-shadow:0 2px 4px rgba(0,0,0,.1)}
+  .wrap{max-width:900px;margin:0 auto}
+  header a{color:#5d4c4b;text-decoration:none;font-weight:600}
+  h1{color:#5d4c4b;margin:28px 0 6px}
+  p.sub{color:#777;margin-bottom:22px;font-size:14px}
+  .total{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:26px}
+  .card{background:#5d4c4b;color:#fefefd;border-radius:12px;padding:14px 22px;min-width:170px}
+  .card b{display:block;font-size:30px;line-height:1.1}
+  .card span{font-size:13px;opacity:.85}
+  h2{color:#5d4c4b;margin:26px 0 8px;font-size:20px}
+  table{width:100%;border-collapse:collapse;background:#fefefd;border:2px solid #5d4c4b;border-radius:12px;overflow:hidden}
+  th,td{padding:9px 14px;text-align:left}
+  th{background:#5d4c4b;color:#fefefd;font-weight:600}
+  td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+  tr+tr td{border-top:1px solid #e6e1e0}
+  td a{color:#5d4c4b;text-decoration:none;font-weight:600}
+  td a:hover{text-decoration:underline}
+  .bar{height:6px;background:#e6e1e0;border-radius:3px;margin-top:5px}
+  .bar i{display:block;height:100%;background:#5d4c4b;border-radius:3px}
+  footer{margin:30px 0;color:#999;font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a href="/">← TEAM a.r.g.</a></div></header>
+<main class="wrap">
+  <h1>Visits</h1>
+  <p class="sub">Unique visitors per page, counted by GoatCounter (no cookies, no ads). <span id="stamp"></span></p>
+  <div class="total">
+    <div class="card"><b id="tu">…</b><span>unique visitors (sum of pages)</span></div>
+    <div class="card"><b id="tv">…</b><span>page views</span></div>
+  </div>
+  <div id="out"></div>
+  <footer>Counts only start from the day the counter was added. A visitor is counted once per page per period, so the sum over pages is not the number of different people.</footer>
+</main>
+<script>
+// path = the page's address on the site; edit this list to add pages.
+var GC='https://teamarg.goatcounter.com';
+var GROUPS=[
+ ['Home',[['Home page','/']]],
+ ['Games',[
+  ['Escaper Droid','/ID-20-Escaper-Droid/'],['Shadow Runner','/ID-15-Shadow-Runner/'],
+  ['Blob Attack','/ID-28-Blob-Attack/'],['Begemmed','/ID-30-BEGEMMED/'],
+  ['Reverse Mermaid Hockey','/ID-31-RMH/'],['Epic Crates Of Mass Destruction','/ID-33-ECOMD/'],
+  ['Mystic Balloon','/ID-34-Mystic-Balloon/'],['Trolly Fish','/ID-36-Trolly-Fish/'],
+  ['Dice of Fate','/ID-37-DICE-of-FATE/'],['Virus LQP-79','/ID-40-VIRUS-LQP-79/'],
+  ['Sirene','/ID-42-Sirene/'],['Arduventure','/ID-46-Arduventure/'],['Fantasy Rampage','/ID-48-Fantasy-Rampage/']]],
+ ['Tools',[
+  ['Sprite Editor','/spriteEditor/'],['Tracker Editor','/trackerEditor/'],
+  ['Tracker manual','/trackerEditor/manual.html'],['Sound FX Editor','/soundFXEditor/'],
+  ['Sound FX manual','/soundFXEditor/manual.html'],['Magazine Editor','/Magazine-Editor/'],['ATMlib','/ATMlib/']]]
+];
+function num(s){return parseInt(String(s).replace(/[^\d]/g,''),10)||0}
+function get(path){
+  return fetch(GC+'/counter/'+encodeURIComponent(path)+'.json').then(function(r){
+    if(!r.ok) return {u:0,v:0};            // 404 = no visits recorded yet
+    return r.json().then(function(j){return {u:num(j.count_unique),v:num(j.count)}});
+  }).catch(function(){return {u:null,v:null}});
+}
+var tu=0,tv=0,jobs=[];
+GROUPS.forEach(function(g){g[1].forEach(function(p){jobs.push(get(p[1]).then(function(r){p.r=r}))})});
+Promise.all(jobs).then(function(){
+  var out='';
+  GROUPS.forEach(function(g){
+    var max=Math.max.apply(null,g[1].map(function(p){return p.r.u||0}).concat([1]));
+    var rows=g[1].slice().sort(function(a,b){return (b.r.u||0)-(a.r.u||0)});
+    out+='<h2>'+g[0]+'</h2><table><tr><th>Page</th><th class="n">Unique</th><th class="n">Views</th></tr>';
+    rows.forEach(function(p){
+      if(p.r.u!==null){tu+=p.r.u;tv+=p.r.v}
+      out+='<tr><td><a href="'+p[1]+'">'+p[0]+'</a><div class="bar"><i style="width:'+Math.round(100*(p.r.u||0)/max)+'%"></i></div></td>'+
+           '<td class="n">'+(p.r.u===null?'—':p.r.u)+'</td><td class="n">'+(p.r.v===null?'—':p.r.v)+'</td></tr>';
+    });
+    out+='</table>';
+  });
+  document.getElementById('out').innerHTML=out;
+  document.getElementById('tu').textContent=tu;
+  document.getElementById('tv').textContent=tv;
+  document.getElementById('stamp').textContent='Updated '+new Date().toLocaleString();
+});
+</script>
+</body>
+</html>
